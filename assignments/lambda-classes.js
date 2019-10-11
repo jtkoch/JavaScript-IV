@@ -1,7 +1,7 @@
 // CODE here for your Lambda Classes
 
 class Person {
-  constructor([properties]) {
+  constructor(properties) {
     this.name = properties.name;
     this.age = properties.age;
     this.location = properties.location;
@@ -12,53 +12,85 @@ class Person {
 }
 
 class Instructor extends Person {
-  constructor(instructorProperties) {
-    super(instructorProperties);
-    this.specialty = instructorProperties.specialty;
-    this.favLanguage = instructorProperties.favLanguage;
-    this.catchPhrase = instructorProperties.catchPhrase;
+  constructor(properties) {
+    super(properties);
+    this.specialty = properties.specialty;
+    this.favLanguage = properties.favLanguage;
+    this.catchPhrase = properties.catchPhrase;
   }
   demo(subject) {
-    console.log('Today we are leaning about {subject}');
+    console.log('Today we are leaning about ${subject}');
   }
 }
 
 class Student extends Person {
-  constructor(studentProperties) {
-    super(studentProperties);
-    this.previousBackground = studentProperties.previousBackground;
-    this.className = studentProperties.className;
-    this.favSubjects = studentProperties.favSubjects;
+  constructor(properties) {
+    super(properties);
+    this.previousBackground = properties.previousBackground;
+    this.className = properties.className;
+    this.favSubjects = properties.favSubjects;
   }
   listsSubjects() {
-    console.log('studentProperties.fabSubjects');
+    console.log(`${this.name}'s favorite subjects are ${this.favSubjects}`);
   }
   PRAssignment() {
-    console.log(`${this.name} has submitted a PR for {subject}`);
+    console.log(`${this.name} has submitted a PR for ${this.subject}`);
   }
   sprintChallenge() {
-    console.log(`${this.name} hav begun sprint challenge on {subject}`);
+    console.log(`${this.name} has begun sprint challenge on ${this.subject}`);
   }
 }
 
 class ProjectManagers extends Instructor {
-  constructor(projectManagersProperties){
-    super(projectManagersProperties)
-    this.gradClassName = projectManagersProperties.gradClassName;
-    this.favInstructor = projectManagersProperties.favInstructor;
+  constructor(properties){
+    super(properties);
+    this.gradClassName = properties.gradClassName;
+    this.favInstructor = properties.favInstructor;
   }
   standUp() {
-    console.log(`{name} announces to {channel}, @channel standy times!`);
+    console.log(`${this.name} announces to ${this.Channel}, @channel standy times!`);
   }
   debugsCode() {
-    console.log(`{name} debus {student.name}'s cone on {subject}`);
+    console.log(`${this.name} debugs ${this.student}'s code on ${this.subject}`);
   }
 }
 
-const teacher = new Instructor('Hello');
-const learn = new Student('Hey, there');
-const teamLead = new ProjectManagers('Howdy');
+const teacher = new Instructor({
+  name: 'Fred',
+  location: 'Bedrock',
+  age: 37,
+  favLanguage: 'JavaScript, Python, Elm etc.',
+  specialty: 'Redux',
+  catchPhrase: `Don't forget the homies`
+});
+const me = new Student({
+  name: 'Fred',
+  location: 'Bedrock',
+  age: 37,
+  favLanguage: 'JavaScript',
+  specialty: 'Front-end',
+  catchPhrase: `Don't forget the homies`,
+  previousBackground: 'Audio/Visual Installations',
+  className: 'WEBPT11',
+  favSubjects: 'JavaScript, Less, Flexbox'
+});
+const teamLead = new ProjectManagers({
+  name: 'Fred',
+  location: 'Bedrock',
+  age: 37,
+  favLanguage: 'JavaScript',
+  specialty: 'Front-end',
+  catchPhrase: `Don't forget the homies`,
+  gradClassName: 'WEBPT11', 
+  favInstructor: 'Pace Elsworth'
+});
 
 console.log(teacher);
-console.log(learn);
+console.log(me);
 console.log(teamLead);
+teacher.demo();
+me.listsSubjects();
+me.PRAssignment();
+me.sprintChallenge();
+teamLead.standUp();
+teamLead.debugsCode();
